@@ -28,6 +28,17 @@ import SwiftUI
 
 // Can create views as properties - allows for cleaner code in the body property.
 
+struct CapsuleText: View {
+    var text: String
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .padding()
+            .background(.blue)
+            .clipShape(Capsule())
+    }
+}
+
 struct ContentView: View {
     let motto1 = Text("YOYOYOY")
     @ViewBuilder var motto2: some View {
@@ -53,6 +64,13 @@ struct ContentView: View {
         }
         .font(.title) // environment moditfier - applied to every element in vstack. but child's version will take priority
         .blur(radius: 0) // not an environment modifier, regular modifier - child modifier adds up
+        
+        VStack(spacing: 10) {
+            CapsuleText(text: "First")
+                .foregroundColor(.white)
+            CapsuleText(text: "SECOND")
+                .foregroundColor(.orange)
+        }
         
     }
 }
