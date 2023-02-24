@@ -28,6 +28,27 @@ import SwiftUI
 
 // Can create views as properties - allows for cleaner code in the body property.
 
+// It is possible to create custom modifiers other than the ones Swift UI already has in built. It is a good idea to add an extension on the view protocol just so that it's easier to work with. When you create custom modifiers, you are able to use properties inside the struct as opposed to when u just extend the view protocol with some functionality. 
+
+// Example:
+
+extension View {
+    func titleStyle() -> some View {
+        modifier(Title())
+    }
+}
+
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.white)
+            .padding()
+            .background(.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+    }
+}
+
 struct CapsuleText: View {
     var text: String
     var body: some View {
@@ -52,12 +73,14 @@ struct ContentView: View {
     var body: some View {
         VStack {
             motto1
+                .modifier(Title()) // calling custom modifier
             motto2
                 .foregroundColor(.mint)
             Text("Griffindor")
                 .font(.largeTitle)
                 .blur(radius: 20)
             Text("Hufflepuff")
+                .titleStyle()
             Text("Ravenclaw")
             Text("Slytherin")
                 .bold()
