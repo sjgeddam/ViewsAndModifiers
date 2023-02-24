@@ -26,9 +26,23 @@ import SwiftUI
 
 // Need to read documentation on whether a modifier is a environment modifier or regular modifier.
 
+// Can create views as properties - allows for cleaner code in the body property.
+
 struct ContentView: View {
+    let motto1 = Text("YOYOYOY")
+    @ViewBuilder var motto2: some View {
+        // Should be careful when doing this because motto2 doesn't have ViewBuilder as 'body' inherently has - should specifically organize in stack. If you don't want to specifically organize in stack, you could sent back a group.
+        // Final option is to apply @ViewBuilder before declaring motto2 (if you don't want to use Group or Stacks)
+        Group {
+            Text("HAHAAHAA")
+            Text("WHATS GOOD")
+        }
+    }
     var body: some View {
         VStack {
+            motto1
+            motto2
+                .foregroundColor(.mint)
             Text("Griffindor")
                 .font(.largeTitle)
                 .blur(radius: 20)
@@ -38,7 +52,7 @@ struct ContentView: View {
                 .bold()
         }
         .font(.title) // environment moditfier - applied to every element in vstack. but child's version will take priority
-        .blur(radius: 5) // not an environment modifier, regular modifier - child modifier adds up
+        .blur(radius: 0) // not an environment modifier, regular modifier - child modifier adds up
         
     }
 }
