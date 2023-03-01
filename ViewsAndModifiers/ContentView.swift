@@ -38,6 +38,15 @@ extension View {
     }
 }
 
+struct BlueTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .fontWeight(.bold)
+            .foregroundColor(.blue)
+    }
+}
+
 struct Title: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -53,10 +62,7 @@ struct CapsuleText: View {
     var text: String
     var body: some View {
         Text(text)
-            .font(.largeTitle)
-            .padding()
-            .background(.blue)
-            .clipShape(Capsule())
+            .modifier(BlueTitle())
     }
 }
 
